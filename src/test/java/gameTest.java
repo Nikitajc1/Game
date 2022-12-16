@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.internal.util.Platform;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class gameTest {
@@ -16,13 +17,21 @@ public class gameTest {
     @Test
     public void registerTest() {
         service.register(player1);
+        service.register(player2);
+        service.register(player3);
+        service.register(player4);
+        service.register(player5);
 
-        List<Player> expected = new ArrayList<>();
-        expected.add(player1);
+        HashMap<Player, String> expected = new HashMap<>();
+        expected.put(player1, "Ivan");
+        expected.put(player2, "Olya");
+        expected.put(player3, "Masha");
+        expected.put(player4, "Misha");
+        expected.put(player5, "Oleg");
 
-        List<Player> actual = service.findAll();
+        HashMap<Player, String> actual = service.findAll();
 
-        Assertions.assertIterableEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

@@ -1,27 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.management.PlatformLoggingMXBean;
+import java.util.HashMap;
 
 public class Game {
 
-    private List<Player> players = new ArrayList<>();
+    private HashMap<Player, String> players = new HashMap<>();
 
     public void register(Player player) {
-        players.add(player);
-//        List<Player> item = new ArrayList<>();
-//        int index = 0;
-//        for (Player name : players) {
-//            name = item.get(0);
-//            index++;
-//        }
-////        for (int i = 0; i < players.size(); i++) {
-////            item.get(0) = players.get(i);
-////        }
-////        item.get(0) = player;
-//        players = item;
+        players.put(player, player.getName());
     }
 
     public Player findByName(String name) {
-        for (Player item : players) {
+        for (Player item : players.keySet()) {
             if (item.getName().equals(name)) {
                 return item;
             }
@@ -43,7 +32,13 @@ public class Game {
         }
     }
 
-    public List<Player> findAll() {
-        return players;
+    public HashMap<Player, String> findAll() {
+        HashMap<Player, String> player = new HashMap<>();
+        for (Player key : players.keySet()) {
+            String value = players.get(key);
+            player.put(key, value);
+        }
+        return player;
     }
+
 }
