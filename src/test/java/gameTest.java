@@ -13,6 +13,20 @@ public class gameTest {
     Player player3 = new Player(3, "Masha", 3);
     Player player4 = new Player(4, "Misha", 8);
     Player player5 = new Player(5, "Oleg", 7);
+    Player player6 = new Player(6, "Ivan", 10);
+
+    @Test
+    public void ifAlreadyRegistered() {
+        service.register(player1);
+        service.register(player2);
+        service.register(player3);
+        service.register(player4);
+        service.register(player5);
+
+        Assertions.assertThrows(AlreadyRegisteredException.class, () -> {
+            service.register(player6);
+        });
+    }
 
     @Test
     public void registerTest() {

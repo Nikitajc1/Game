@@ -3,13 +3,27 @@ import java.util.HashMap;
 
 public class Game {
 
-    private HashMap<String, Integer> players = new HashMap<>();
+    private final HashMap<String, Integer> players = new HashMap<>();
+
+    private boolean ifAlreadyRegistered(Player player) {
+        for (String name : players.keySet()) {
+            if (player.getName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void register(Player player) {
-        players.put(player.getName(), player.getStrength());
+        if (ifAlreadyRegistered(player)) {
+            players.put(player.getName(), player.getStrength());
+        } else {
+            throw new AlreadyRegisteredException("Игрок с именем " + player.getName() + " уже зарегистрирован. Придумайте новое имя");
+        }
     }
 
     public HashMap<String, Integer> ifRegistered(String name) {
+
         HashMap<String, Integer> player = new HashMap<>();
 
         for (String item : players.keySet()) {
