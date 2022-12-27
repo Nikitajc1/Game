@@ -7,20 +7,9 @@ public class Game {
 
     public void register(Player player) {
         players.add(player);
-//        List<Player> item = new ArrayList<>();
-//        int index = 0;
-//        for (Player name : players) {
-//            name = item.get(0);
-//            index++;
-//        }
-////        for (int i = 0; i < players.size(); i++) {
-////            item.get(0) = players.get(i);
-////        }
-////        item.get(0) = player;
-//        players = item;
     }
 
-    public Player findByName(String name) {
+    public Player ifRegistered(String name) {
         for (Player item : players) {
             if (item.getName().equals(name)) {
                 return item;
@@ -31,8 +20,8 @@ public class Game {
 
 
     public int round(String playerName1, String playerName2) throws Exception {
-        Player player1 = findByName(playerName1);
-        Player player2 = findByName(playerName2);
+        Player player1 = ifRegistered(playerName1);
+        Player player2 = ifRegistered(playerName2);
 
         if (player1.getStrength() < player2.getStrength()) {
             return 2;
