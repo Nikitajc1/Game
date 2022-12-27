@@ -22,27 +22,28 @@ public class gameTest {
         service.register(player4);
         service.register(player5);
 
-        HashMap<Player, String> expected = new HashMap<>();
-        expected.put(player1, "Ivan");
-        expected.put(player2, "Olya");
-        expected.put(player3, "Masha");
-        expected.put(player4, "Misha");
-        expected.put(player5, "Oleg");
+        HashMap<String, Integer> expected = new HashMap<>();
+        expected.put("Olya", 8);
+        expected.put("Masha", 3);
+        expected.put("Ivan", 6);
+        expected.put("Oleg", 7);
+        expected.put("Misha", 8);
 
-        HashMap<Player, String> actual = service.findAll();
+        HashMap<String, Integer> actual = service.findAll();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void findByNameIfExist() {
+    public void IfRegisteredIfExist() {
         service.register(player1);
         service.register(player2);
         service.register(player3);
 
-        Player expected = player2;
+        HashMap<String, Integer> expected = new HashMap<>();
+        expected.put("Masha", 3);
 
-        Player actual = service.findByName("Olya");
+        HashMap<String, Integer> actual = service.ifRegistered("Masha");
 
         Assertions.assertEquals(expected, actual);
     }
@@ -54,7 +55,7 @@ public class gameTest {
         service.register(player3);
 
         Assertions.assertThrows(NotRegisteredException.class, () -> {
-            service.findByName("O");
+            service.ifRegistered("O");
         });
     }
 
