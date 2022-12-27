@@ -33,7 +33,7 @@ public class gameTest {
 
         Player expected = player2;
 
-        Player actual = service.findByName("Olya");
+        Player actual = service.ifRegistered("Olya");
 
         Assertions.assertEquals(expected, actual);
     }
@@ -45,7 +45,7 @@ public class gameTest {
         service.register(player3);
 
         Assertions.assertThrows(NotRegisteredException.class, () -> {
-            service.findByName("O");
+            service.ifRegistered("O");
         });
     }
 
