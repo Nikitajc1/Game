@@ -1,9 +1,9 @@
-import java.lang.management.PlatformLoggingMXBean;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Game {
 
-    private final HashMap<String, Integer> players = new HashMap<>();
+    private HashMap<String, Integer> players = new HashMap<>();
 
     private boolean ifAlreadyRegistered(Player player) {
         for (String name : players.keySet()) {
@@ -26,11 +26,15 @@ public class Game {
 
         HashMap<String, Integer> player = new HashMap<>();
 
-        for (String item : players.keySet()) {
-            if (item.equals(name)) {
-                player.put(item, players.get(item));
-                return player;
-            }
+        if (players.containsKey(name)) {
+            player.put(name, players.get(name));
+            return player;
+//        for (String item : players.keySet()) {
+//            if (item.equals(name)) {
+//                player.put(item, players.get(item));
+//                Player getP1 = (Player)players.get();
+//                return player;
+//            }
         }
         throw new NotRegisteredException("Игрока с именем " + name + " нет в списке зарегистрированных");
     }
