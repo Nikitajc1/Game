@@ -1,10 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.util.Platform;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class gameTest {
     Game service = new Game();
@@ -16,7 +13,7 @@ public class gameTest {
     Player player6 = new Player(6, "Ivan", 10);
 
     @Test
-    public void ifAlreadyRegistered() {
+    public void ifAlreadyRegistered() throws Exception {
         service.register(player1);
         service.register(player2);
         service.register(player3);
@@ -29,7 +26,7 @@ public class gameTest {
     }
 
     @Test
-    public void registerTest() {
+    public void registerTest() throws Exception {
         service.register(player1);
         service.register(player2);
         service.register(player3);
@@ -49,27 +46,26 @@ public class gameTest {
     }
 
     @Test
-    public void IfRegisteredIfExist() {
+    public void IfRegisteredIfExist() throws Exception {
         service.register(player1);
         service.register(player2);
         service.register(player3);
 
-        HashMap<String, Integer> expected = new HashMap<>();
-        expected.put("Masha", 3);
+        boolean expected = true;
 
-        HashMap<String, Integer> actual = service.ifRegistered("Masha");
+        boolean actual = service.searchInMap("Masha");
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void findByNameIfNotExist() {
+    public void findByNameIfNotExist() throws Exception {
         service.register(player1);
         service.register(player2);
         service.register(player3);
 
         Assertions.assertThrows(NotRegisteredException.class, () -> {
-            service.ifRegistered("O");
+            service.searchInMap("O");
         });
     }
 
@@ -140,7 +136,7 @@ public class gameTest {
     }
 
     @Test
-    public void getIdTest() {
+    public void getIdTest() throws Exception {
         service.register(player1);
 
         int expected = 1;
@@ -150,7 +146,7 @@ public class gameTest {
     }
 
     @Test
-    public void setIdTest() {
+    public void setIdTest() throws Exception {
         service.register(player1);
         player1.setId(7);
 
@@ -161,7 +157,7 @@ public class gameTest {
     }
 
     @Test
-    public void setNameTest() {
+    public void setNameTest() throws Exception {
         service.register(player1);
         player1.setName("Qwarty");
 
@@ -172,7 +168,7 @@ public class gameTest {
     }
 
     @Test
-    public void setStrengthTest() {
+    public void setStrengthTest() throws Exception {
         service.register(player1);
         player1.setStrength(7);
 

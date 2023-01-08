@@ -1,52 +1,40 @@
 import java.util.HashMap;
-import java.util.Set;
 
 public class Game {
 
-    private HashMap<String, Integer> players = new HashMap<>();
+    private final HashMap<String, Integer> players = new HashMap<>();
 
-    private boolean ifAlreadyRegistered(Player player) {
-        for (String name : players.keySet()) {
-            if (player.getName().equals(name)) {
-                return false;
-            }
+    private boolean ifAlreadyRegistered(Player player) throws Exception {
+        if (players.containsKey(player.getName())) {
+            throw new AlreadyRegisteredException("Игрок с именем " + player.getName() + " уже зарегистрирован. Придумайте новое имя");
         }
         return true;
     }
 
-    public void register(Player player) {
-        if (ifAlreadyRegistered(player)) {
-            players.put(player.getName(), player.getStrength());
-        } else {
-            throw new AlreadyRegisteredException("Игрок с именем " + player.getName() + " уже зарегистрирован. Придумайте новое имя");
-        }
+    public void register(Player player) throws Exception {
+        ifAlreadyRegistered(player);
+        players.put(player.getName(), player.getStrength());
+
     }
 
-    public HashMap<String, Integer> ifRegistered(String name) {
-
-        HashMap<String, Integer> player = new HashMap<>();
+    public boolean searchInMap(String name) {
 
         if (players.containsKey(name)) {
-            player.put(name, players.get(name));
-            return player;
-//        for (String item : players.keySet()) {
-//            if (item.equals(name)) {
-//                player.put(item, players.get(item));
-//                Player getP1 = (Player)players.get();
-//                return player;
-//            }
+            return true;
         }
         throw new NotRegisteredException("Игрока с именем " + name + " нет в списке зарегистрированных");
     }
 
-
     public int round(String playerName1, String playerName2) throws Exception {
-        HashMap<String, Integer> player1 = ifRegistered(playerName1);
-        HashMap<String, Integer> player2 = ifRegistered(playerName2);
+        searchInMap(playerName1);
+        searchInMap(playerName2);
 
-        if (player1.get(playerName1) < player2.get(playerName2)) {
+        int strength1 = players.get(playerName1);
+        int strength2 = players.get(playerName2);
+
+        if (strength1 < strength2) {
             return 2;
-        } else if (player1.get(playerName1) > player2.get(playerName2)) {
+        } else if (strength1 > strength2) {
             return 1;
         } else {
             return 0;
