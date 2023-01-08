@@ -4,11 +4,10 @@ public class Game {
 
     private final HashMap<String, Integer> players = new HashMap<>();
 
-    private boolean ifAlreadyRegistered(Player player) throws Exception {
+    private void ifAlreadyRegistered(Player player) throws Exception {
         if (players.containsKey(player.getName())) {
             throw new AlreadyRegisteredException("Игрок с именем " + player.getName() + " уже зарегистрирован. Придумайте новое имя");
         }
-        return true;
     }
 
     public void register(Player player) throws Exception {
